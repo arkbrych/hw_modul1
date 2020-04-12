@@ -16,7 +16,6 @@ public class AppService {
     private PlusService plusService;
     private PremiumService premiumService;
 
-
     private int priceSum;
     private int priceGross;
     private int priceWithDiscount;
@@ -69,11 +68,13 @@ public class AppService {
 
     public int addVat() {
         priceGross = plusService.addVatService(priceSum);
+        setPriceGross(priceGross);
         return priceGross;
     }
 
     public int addDiscount() {
         priceWithDiscount = premiumService.addDiscountService(priceGross);
+        setPriceWithDiscount(priceWithDiscount);
         return priceWithDiscount;
     }
 }

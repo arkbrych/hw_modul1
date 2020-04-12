@@ -41,7 +41,6 @@ public class ApiController {
 
     @GetMapping("/grossPrice")
     public String showGrossPrice() throws Exception {
-        System.out.println(getActiveProfiles());
         if (!getActiveProfiles().equals("start")) {
             return "Cena BRUTTO wszystkich produktów wynosi: " + appService.addVat();
         } else throw new Exception("Z tej funkcjonalności nie może korzystać profil START");

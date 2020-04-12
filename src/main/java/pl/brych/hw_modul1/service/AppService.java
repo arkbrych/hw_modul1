@@ -1,14 +1,14 @@
 package pl.brych.hw_modul1.service;
 
 import lombok.Data;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import pl.brych.hw_modul1.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-@Component
+@Service
 @Data
 public class AppService {
 
@@ -19,6 +19,12 @@ public class AppService {
     private int priceSum;
     private int priceGross;
     private int priceWithDiscount;
+
+    public AppService(PlusService plusService, PremiumService premiumService) {
+        this.plusService = plusService;
+        this.premiumService = premiumService;
+        initializer();
+    }
 
     public void initializer() {
         Product product1 = new Product("Monitor", priceGenerator());
@@ -32,12 +38,6 @@ public class AppService {
         productList.add(product3);
         productList.add(product4);
         productList.add(product5);
-    }
-
-    public AppService(PlusService plusService, PremiumService premiumService) {
-        this.plusService = plusService;
-        this.premiumService = premiumService;
-        initializer();
     }
 
     private int priceGenerator() {

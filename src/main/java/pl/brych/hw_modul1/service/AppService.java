@@ -16,6 +16,7 @@ public class AppService {
     private PlusService plusService;
     private PremiumService premiumService;
 
+
     private int priceSum;
     private int priceGross;
     private int priceWithDiscount;
@@ -56,6 +57,7 @@ public class AppService {
         for (Product product : productList) {
             priceSum = priceSum + product.getProductPrice();
         }
+        setPriceSum(priceSum);
         return priceSum;
     }
 

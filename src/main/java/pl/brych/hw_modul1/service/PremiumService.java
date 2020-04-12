@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
-@Profile("premium")
 public class PremiumService {
 
     @Value("${value.discount}")

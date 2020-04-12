@@ -5,21 +5,14 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
-//@Profile("premium")
+@Profile("premium")
 public class PremiumService {
 
     @Value("${value.discount}")
     int discountValue;
 
-    private PlusService plusService;
-
-    public PremiumService(PlusService plusService) {
-        this.plusService = plusService;
+    public int addDiscountService(int grossPrice) {
+        int discount = (grossPrice * discountValue) / 100;
+        return grossPrice - discount;
     }
-
-//    public int addDiscountService() {
-//        int sum = plusService.addVatService();
-//        int discount = (sum * discountValue) / 100;
-//        return sum - discount;
-//    }
 }

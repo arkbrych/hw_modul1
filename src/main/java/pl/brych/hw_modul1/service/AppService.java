@@ -1,5 +1,6 @@
 package pl.brych.hw_modul1.service;
 
+import lombok.Data;
 import org.springframework.stereotype.Component;
 import pl.brych.hw_modul1.model.Product;
 
@@ -8,15 +9,18 @@ import java.util.List;
 import java.util.Random;
 
 @Component
+@Data
 public class AppService {
 
     private List<Product> productList;
     private PlusService plusService;
     private PremiumService premiumService;
 
-    private int tester = 1000;
+    private int priceSum;
+    private int priceGross;
+    private int priceWithDiscount;
 
-    public AppService() {
+    public void initializer() {
         Product product1 = new Product("Monitor", priceGenerator());
         Product product2 = new Product("Myszka", priceGenerator());
         Product product3 = new Product("Klawiatura", priceGenerator());
@@ -33,6 +37,7 @@ public class AppService {
     public AppService(PlusService plusService, PremiumService premiumService) {
         this.plusService = plusService;
         this.premiumService = premiumService;
+        initializer();
     }
 
     private int priceGenerator() {
@@ -47,11 +52,11 @@ public class AppService {
     }
 
     public int calculatePriceSum() {
-        int priceSummary = 0;
+        priceSum = 0;
         for (Product product : productList) {
-            priceSummary = priceSummary + product.getProductPrice();
+            priceSum = priceSum + product.getProductPrice();
         }
-        return priceSummary;
+        return priceSum;
     }
 
     public Product createProduct(Product product) {
@@ -61,11 +66,12 @@ public class AppService {
     }
 
     public int addVat() {
-
-        return plusService.addVatService(tester);
+        priceGross = plusService.addVatService(priceSum);
+        return priceGross;
     }
 
-//    public int addDiscount() {
-//        return premiumService.addDiscountService();
-//    }
+    public int addDiscount() {
+        priceWithDiscount = premiumService.addDiscountService(priceGross);
+        return priceWithDiscount;
+    }
 }

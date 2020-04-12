@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.brych.hw_modul1.model.Product;
 import pl.brych.hw_modul1.service.AppService;
-import pl.brych.hw_modul1.service.PlusService;
-import pl.brych.hw_modul1.service.PremiumService;
 
 import java.util.List;
 
@@ -40,10 +38,10 @@ public class ApiController {
         return "Cena BRUTTO wszystkich produktów wynosi: " + appService.addVat();
     }
 
-//    @GetMapping("/giveDiscount")
-//    public String showGrossPriceWithDiscount() {
-//        return "Cena BRUTTO po przyznaniu rabatu: " + appService.addDiscount();
-//    }
+    @GetMapping("/giveDiscount")
+    public String showGrossPriceWithDiscount() {
+        return "Cena BRUTTO po przyznaniu rabatu: " + appService.addDiscount();
+    }
 
 
 }
